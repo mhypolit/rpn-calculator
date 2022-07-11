@@ -6,8 +6,12 @@ export enum CommandTypes {
     help = 'rpn help',
     c = 'rpn c',
     clear = 'rpn clear',
+    cc = 'rpn cc',
+    clearConsole = 'rpn clearconsole',
     cl = 'rpn cl',
     clearAll = 'rpn clearall',
     a = '+',
-    add = 'rpn add'
+    add = 'rpn add',
+    s = '-',
+    subtract = 'rpn subtract',
 }

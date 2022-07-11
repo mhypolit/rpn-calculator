@@ -35,10 +35,24 @@ export class CommandService extends RpnCalcBase{
         return false;
     }
 
+    private handleClearConsole(): boolean {
+        this.clear();
+        return false;
+    }
+
     private handleAdd(): boolean {
         const numberA = this.numberStackService.pullNumberFromStack();
         const numberB = this.numberStackService.pullNumberFromStack();
         const sum = Number(numberA) + Number(numberB);
+        this.numberStackService.addNumberToStack(sum);
+
+        return false;
+    }
+
+    private handleSubtract(): boolean {
+        const numberA = this.numberStackService.pullNumberFromStack();
+        const numberB = this.numberStackService.pullNumberFromStack();
+        const sum = Number(numberA) - Number(numberB);
         this.numberStackService.addNumberToStack(sum);
 
         return false;
@@ -65,35 +79,34 @@ export class CommandService extends RpnCalcBase{
 
     public runCommand(commands: CommandTypes): any {
         switch (commands) {
+            case CommandTypes.h: 
             case CommandTypes.help:
                 return this.handleHelp();
-
-            case CommandTypes.h:
-                return this.handleHelp();
         
+            case CommandTypes.q: 
             case CommandTypes.quit:
                 return this.handleQuit();
 
-            case CommandTypes.q:
-                return this.handleQuit();
-
+            case CommandTypes.c: 
             case CommandTypes.clear:
                 return this.handleClear();
 
-            case CommandTypes.c:
-                return this.handleClear();
-
+            case CommandTypes.cl: 
             case CommandTypes.clearAll:
                 return this.handleClear(true);
 
-            case CommandTypes.cl:
-                return this.handleClear(true);
+            case CommandTypes.cc: 
+            case CommandTypes.clearConsole:
+                return this.handleClearConsole();
                 
-            case CommandTypes.a:
-                return this.handleAdd();
-
+            case CommandTypes.a: 
             case CommandTypes.add:
                 return this.handleAdd();
+
+            case CommandTypes.s: 
+            case CommandTypes.subtract:
+                return this.handleSubtract();
+
             default:
                 return false;
         }
