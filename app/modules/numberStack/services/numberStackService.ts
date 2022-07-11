@@ -1,3 +1,5 @@
+import { Operands } from '../models/operands';
+
 export class NumberStackService {
     public static numberStack: number[] = [];
 
@@ -26,5 +28,17 @@ export class NumberStackService {
                 console.log(`${value}`);
             }
         });
+    }
+
+    public getOperands(): Operands {
+        let operands: Operands = {
+            numberA: 0,
+            numberB: 0
+        };
+        
+        operands.numberA = this.pullNumberFromStack();
+        operands.numberB = this.pullNumberFromStack();
+
+        return operands;
     }
 }

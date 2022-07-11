@@ -14,4 +14,6 @@ export enum CommandTypes {
     add = 'rpn add',
     s = '-',
     subtract = 'rpn subtract',
+    m = '*',
+    multiply = 'rpn multiply',
 }
