@@ -25,9 +25,9 @@ export class Main extends RpnCalcBase {
         this.formatterService.formatHeader(HeaderLookup.mainHeader);
         this.commandService.runCommand(CommandTypes.help);
 
-        let runProgram: boolean = true;
+        let exitProgram: boolean = false;
 
-        while (runProgram == true) 
+        while (exitProgram == false) 
         {
             this.formatterService.printNewLine();
 
@@ -38,7 +38,7 @@ export class Main extends RpnCalcBase {
             if(this.utilities.isNumeric(command)){
                 this.numberStackService.addNumberToStack(command as number);
             } else {       
-                runProgram = this.commandService.runCommand(command);
+                exitProgram = this.commandService.runCommand(command);
             }
 
             this.formatterService.printDivider();

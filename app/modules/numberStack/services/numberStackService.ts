@@ -7,8 +7,10 @@ export class NumberStackService {
         NumberStackService.numberStack.push(command);
     }
 
-    public removeNumberFromStack(): void {
-        console.log(`Removing: ${NumberStackService.numberStack.pop()}`);
+    public pullNumberFromStack(): number {
+        const number = NumberStackService.numberStack.pop();
+        console.log(`Pulling number: ${number}`);
+        return number || 0;
     }
 
     public removeAllNumberFromStack(): void {
