@@ -22,6 +22,11 @@ export class CommandService extends RpnCalcBase {
     }
 
     private handleQuit(): boolean {
+        this.formatterService.formatHeader('Thank You!');
+        console.log('For trying out the RPN Calculator. \n');
+        console.log('Written by Mark Hypolite \n');
+        console.log('Copyright 2022 - RPN Calculator v1.0.0 \n');
+
         return true;
     }
 
