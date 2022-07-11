@@ -24,12 +24,19 @@ Step 4: Type `npm run calc` in the command line.
 **Tech Dependencies:**
 
 TypeScript 2.5.3
+
 TS-Node 3.3.0
+
 NodeJs 16.13.2
+
 Chalk: 2.3.0
+
 Clear: 0.1.0
+
 Core-js: 2.5.1
+
 Figlet: 1.5.2
+
 
 **Reason Behind Tech Stack, Architecture:** 
 
