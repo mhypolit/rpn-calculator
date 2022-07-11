@@ -1,6 +1,7 @@
 import { RpnCalcBase } from "../../../core/rpnCalcBase";
 import { CommandTypes } from "../enums/commandTypes";
 import { CommandLookup } from "../lookups/commandLookup";
+import { ErrorsLookup } from '../../shared/lookups/errorsLookup';
 import { Command } from "../models/command";
 
 export class CommandService extends RpnCalcBase {
@@ -36,37 +37,50 @@ export class CommandService extends RpnCalcBase {
 
     private handleAdd(): boolean {
         const operands = this.numberStackService.getOperands();
-        const sum = Number(operands.numberA) + Number(operands.numberB);
-        this.numberStackService.addNumberToStack(sum);
+
+        if (operands != null){
+            const sum = Number(operands.numberA) + Number(operands.numberB);
+            this.numberStackService.addNumberToStack(sum);
+        }
 
         return false;
     }
 
     private handleSubtract(): boolean {
         const operands = this.numberStackService.getOperands();
-        const difference = Number(operands.numberA) - Number(operands.numberB);
-        this.numberStackService.addNumberToStack(difference);
+
+        if (operands != null) {
+            const difference = Number(operands.numberA) - Number(operands.numberB);
+            this.numberStackService.addNumberToStack(difference);
+        }
 
         return false;
     }
 
     private handleMultiply(): boolean {
         const operands = this.numberStackService.getOperands();
-        const product = Number(operands.numberA) * Number(operands.numberB);
-        this.numberStackService.addNumberToStack(product);
-        
+
+        if (operands != null) { 
+            const product = Number(operands.numberA) * Number(operands.numberB);
+            this.numberStackService.addNumberToStack(product);
+        }
+
         return false;
     }
 
     private handleDivide(): boolean {
         const operands = this.numberStackService.getOperands();
         let product = 0;
-        if (operands.numberB != 0){
-            product = Number(operands.numberA) / Number(operands.numberB);
-            this.numberStackService.addNumberToStack(product);
+        if (operands && operands.numberB != 0){
+            if (operands != null) { 
+                product = Number(operands.numberA) / Number(operands.numberB);
+                this.numberStackService.addNumberToStack(product);
+            }
         } else {
-            this.numberStackService.reverseOperands(operands);
-            this.formatterService.printErrorMsg(CommandLookup.divideByZeroError);
+            if(operands != null){
+                this.numberStackService.reverseOperands(operands);
+            }
+            this.formatterService.printErrorMsg(ErrorsLookup.divideByZeroError);
         }
         
         return false;
@@ -126,6 +140,7 @@ export class CommandService extends RpnCalcBase {
                 return this.handleDivide();
 
             default:
+                this.formatterService.printErrorMsg(ErrorsLookup.notACommandError)
                 return false;
         }
     }

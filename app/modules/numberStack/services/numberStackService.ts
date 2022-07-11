@@ -1,6 +1,9 @@
 import { Operands } from '../models/operands';
+import { FormatterService } from '../../formatter/services/formatterService';
+import { ErrorsLookup } from '../../shared/lookups/errorsLookup';
 
 export class NumberStackService {
+    private readonly formatterService: FormatterService = new FormatterService();
     public static numberStack: number[] = [];
 
     constructor(){}
@@ -9,10 +12,10 @@ export class NumberStackService {
         NumberStackService.numberStack.push(value);
     }
 
-    public pullNumberFromStack(): number {
+    public pullNumberFromStack(): number | undefined {
         const number = NumberStackService.numberStack.pop();
         console.log(`Pulling number: ${number}`);
-        return number || 0;
+        return number;
     }
 
     public removeAllNumberFromStack(): void {
@@ -30,20 +33,28 @@ export class NumberStackService {
         });
     }
 
-    public getOperands(): Operands {
+    public getOperands(): Operands | null {
         let operands: Operands = {
-            numberA: 0,
-            numberB: 0
+            numberA: undefined,
+            numberB: undefined
         };
-        
-        operands.numberA = this.pullNumberFromStack();
-        operands.numberB = this.pullNumberFromStack();
 
-        return operands;
+        console.log(NumberStackService.numberStack.length);
+
+        const notAFullStack: Boolean =  operands.numberA == undefined || operands.numberB == undefined;
+
+        if (notAFullStack) {
+            this.formatterService.printErrorMsg(ErrorsLookup.noOperandsError);
+        } else {     
+            operands.numberA = this.pullNumberFromStack();
+            operands.numberB = this.pullNumberFromStack();
+        }
+
+        return notAFullStack ? null : operands;
     }
 
     public reverseOperands(operands: Operands): void {
-        this.addNumberToStack(operands.numberB);
-        this.addNumberToStack(operands.numberA);
+        this.addNumberToStack(operands.numberB || 0);
+        this.addNumberToStack(operands.numberA || 0);
     }
 }
