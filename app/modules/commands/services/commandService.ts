@@ -11,57 +11,37 @@ export class CommandService extends RpnCalcBase{
         super();
     }
 
-    public runCommand(commands: CommandTypes): any {
-        switch (commands) {
-            case CommandTypes.help:
-                return this.helpCommand();
-
-            case CommandTypes.h:
-                return this.helpCommand();
-        
-            case CommandTypes.quit:
-                return this.quitCommand();
-
-            case CommandTypes.q:
-                return this.quitCommand();
-
-            case CommandTypes.clear:
-                return this.clearCommand();
-
-            case CommandTypes.c:
-                return this.clearCommand();
-
-            case CommandTypes.clearAll:
-                return this.clearCommand(true);
-
-            case CommandTypes.cl:
-                return this.clearCommand(true);
-             
-            default:
-                return true;
-        }
-    }
-
-    private helpCommand(): boolean {
+    private handleHelp(): boolean {
         console.log(CommandLookup.usage);
         console.log('Commands:\n')
         CommandLookup.commandList.forEach((command: Command) => {
             console.log(`${command.name}   ${command.description} \n`);
         });
-        return true;
-    }
 
-    private quitCommand(): boolean {
         return false;
     }
 
-    private clearCommand(isClearAll: boolean = false): boolean {
+    private handleQuit(): boolean {
+        return true;
+    }
+
+    private handleClear(isClearAll: boolean = false): boolean {
         if (isClearAll) {
             this.numberStackService.removeAllNumberFromStack();
         } else {
-            this.numberStackService.removeNumberFromStack();
+            this.numberStackService.pullNumberFromStack();
         }
-        return true;
+
+        return false;
+    }
+
+    private handleAdd(): boolean {
+        const numberA = this.numberStackService.pullNumberFromStack();
+        const numberB = this.numberStackService.pullNumberFromStack();
+        const sum = Number(numberA) + Number(numberB);
+        this.numberStackService.addNumberToStack(sum);
+
+        return false;
     }
 
     public async handleCommandEnter(): Promise<any> {
@@ -81,5 +61,41 @@ export class CommandService extends RpnCalcBase{
         rl.close(); 
 
         return command;
+    }
+
+    public runCommand(commands: CommandTypes): any {
+        switch (commands) {
+            case CommandTypes.help:
+                return this.handleHelp();
+
+            case CommandTypes.h:
+                return this.handleHelp();
+        
+            case CommandTypes.quit:
+                return this.handleQuit();
+
+            case CommandTypes.q:
+                return this.handleQuit();
+
+            case CommandTypes.clear:
+                return this.handleClear();
+
+            case CommandTypes.c:
+                return this.handleClear();
+
+            case CommandTypes.clearAll:
+                return this.handleClear(true);
+
+            case CommandTypes.cl:
+                return this.handleClear(true);
+                
+            case CommandTypes.a:
+                return this.handleAdd();
+
+            case CommandTypes.add:
+                return this.handleAdd();
+            default:
+                return false;
+        }
     }
 }

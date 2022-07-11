@@ -7,5 +7,7 @@ export enum CommandTypes {
     c = 'rpn c',
     clear = 'rpn clear',
     cl = 'rpn cl',
-    clearAll = 'rpn clearall'
+    clearAll = 'rpn clearall',
+    a = '+',
+    add = 'rpn add'
 }
