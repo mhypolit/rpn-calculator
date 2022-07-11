@@ -13,4 +13,12 @@ export class FormatterService{
             )
         );
     }
+
+    public printNewLine(){
+        console.log('\n'); 
+    }
+
+    public printDivider(){
+        console.log('------------------------------------------------------------------------------------------------------------');
+    }
 }
