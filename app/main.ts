@@ -5,6 +5,7 @@ import { RpnCalcBase } from './core/rpnCalcBase';
 import { CommandService } from './modules/commands/services/commandService';
 import { HeaderLookup } from './modules/shared/lookups/headerLookup';
 import { ErrorsLookup } from './modules/shared/lookups/errorsLookup';
+import { CommandTypes } from './modules/commands/enums/commandTypes';
 
 export class Main extends RpnCalcBase {
     private readonly commandService: CommandService = new CommandService();
@@ -28,13 +29,18 @@ export class Main extends RpnCalcBase {
 
                 this.numberStackService.showNumberStack();
 
-                const command = await this.commandService.handleCommandEnter();
+                const enteredCommand = await this.commandService.handleCommandEnter();
 
-                if(this.utilities.isNumeric(command)){
-                    this.numberStackService.addNumberToStack(command as number);
-                } else {       
-                    exitProgram = this.commandService.runCommand(command);
-                }
+                const commandArray:string[] =  await this.commandService.splitCommandBySpaces(enteredCommand);
+
+                commandArray.forEach((command)=> {
+                    if(this.utilities.isNumeric(command)) {
+                        const numberCommand =  parseFloat(command);
+                        this.numberStackService.addNumberToStack(numberCommand);
+                    } else {       
+                        exitProgram = this.commandService.runCommand(command as CommandTypes);
+                    }
+                });
 
                 this.formatterService.printDivider();
             } catch (error) {

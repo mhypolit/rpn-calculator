@@ -10,11 +10,11 @@ export class NumberStackService {
 
     public addNumberToStack(value: number): void {
         NumberStackService.numberStack.push(value);
+        console.log(`Inserting ${value} to stack.`);
     }
 
     public pullNumberFromStack(): number | undefined {
         const number = NumberStackService.numberStack.pop();
-        console.log(`Pulling number: ${number}`);
         return number;
     }
 

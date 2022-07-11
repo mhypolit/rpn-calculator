@@ -5,7 +5,7 @@ export class Utilities {
 
     constructor(){}
 
-    public isNumeric(value: any): boolean {
+    public isNumeric(value: string): boolean {
         let r = new RegExp(/^-?[0-9]\d*(\.\d+)?$/);
         const isNumeric = r.test(value);
         
