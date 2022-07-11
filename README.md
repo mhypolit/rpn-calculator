@@ -22,6 +22,7 @@ Step 3: Navigate to the project git directory on your local computer in console,
 Step 4: Type `npm run calc` in the command line. 
 
 **Tech Dependencies:**
+
 TypeScript 2.5.3
 TS-Node 3.3.0
 NodeJs 16.13.2
