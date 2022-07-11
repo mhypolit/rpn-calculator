@@ -9,8 +9,10 @@ export const CommandLookup = {
         {name: `${CommandTypes.a},  ${CommandTypes.add}`, description: '-Adds last two operands added to the stack.'},
         {name: `${CommandTypes.s},  ${CommandTypes.subtract}`, description: '-Subtract last two operands added to the stack.'},
         {name: `${CommandTypes.m},  ${CommandTypes.multiply}`, description: '-Multiply last two operands added to the stack.'},
+        {name: `${CommandTypes.d},  ${CommandTypes.divide}`, description: '-Divide last two operands added to the stack.'},
     ],
     commandPrompt: `Please enter a number or command, press "enter" to submit: (Need Help? Type ${CommandTypes.h} or ${CommandTypes.help})\n`,
     usage: `Usage: RPN Calculator allows for easy calculation of complex math problem by utilizing stacks of number 
-        and the 4 common operators (addition, subtraction, multiplication, division)\n`
+        and the 4 common operators (addition, subtraction, multiplication, division)\n`,
+    divideByZeroError: 'Unable to divide number by 0, Please select another operator or remove the 0.'
 }
