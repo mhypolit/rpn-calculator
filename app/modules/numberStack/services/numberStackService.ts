@@ -39,17 +39,14 @@ export class NumberStackService {
             numberB: undefined
         };
 
-        console.log(NumberStackService.numberStack.length);
-
-        const notAFullStack: Boolean =  operands.numberA == undefined || operands.numberB == undefined;
-
-        if (notAFullStack) {
+        if (NumberStackService.numberStack.length <= 1) {
             this.formatterService.printErrorMsg(ErrorsLookup.noOperandsError);
         } else {     
             operands.numberA = this.pullNumberFromStack();
             operands.numberB = this.pullNumberFromStack();
         }
-
+        
+        const notAFullStack: Boolean =  operands.numberA == undefined || operands.numberB == undefined;
         return notAFullStack ? null : operands;
     }
 
