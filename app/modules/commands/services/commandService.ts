@@ -2,10 +2,9 @@ import { RpnCalcBase } from "../../../core/rpnCalcBase";
 import { CommandTypes } from "../enums/commandTypes";
 import { CommandLookup } from "../lookups/commandLookup";
 import { Command } from "../models/command";
-import { NumberStackService } from "../../numberStack/services/numberStackService"
 
-export class CommandService extends RpnCalcBase{
-    private readonly numberStackService: NumberStackService = new NumberStackService();
+export class CommandService extends RpnCalcBase {
+    
 
     constructor(){
         super();
@@ -55,7 +54,21 @@ export class CommandService extends RpnCalcBase{
         const operands = this.numberStackService.getOperands();
         const product = Number(operands.numberA) * Number(operands.numberB);
         this.numberStackService.addNumberToStack(product);
+        
+        return false;
+    }
 
+    private handleDivide(): boolean {
+        const operands = this.numberStackService.getOperands();
+        let product = 0;
+        if (operands.numberB != 0){
+            product = Number(operands.numberA) / Number(operands.numberB);
+            this.numberStackService.addNumberToStack(product);
+        } else {
+            this.numberStackService.reverseOperands(operands);
+            this.formatterService.printErrorMsg(CommandLookup.divideByZeroError);
+        }
+        
         return false;
     }
 
@@ -80,33 +93,37 @@ export class CommandService extends RpnCalcBase{
 
     public runCommand(commands: CommandTypes): any {
         switch (commands) {
-            case CommandTypes.h: 
-            case CommandTypes.help:
+            case this.commandTypes.h: 
+            case this.commandTypes.help:
                 return this.handleHelp();
         
-            case CommandTypes.q: 
-            case CommandTypes.quit:
+            case this.commandTypes.q: 
+            case this.commandTypes.quit:
                 return this.handleQuit();
 
-            case CommandTypes.c: 
-            case CommandTypes.clear:
+            case this.commandTypes.c: 
+            case this.commandTypes.clear:
                 return this.handleClear();
 
-            case CommandTypes.cl: 
-            case CommandTypes.clearAll:
+            case this.commandTypes.cl: 
+            case this.commandTypes.clearAll:
                 return this.handleClear(true);
                 
-            case CommandTypes.a: 
-            case CommandTypes.add:
+            case this.commandTypes.a: 
+            case this.commandTypes.add:
                 return this.handleAdd();
 
-            case CommandTypes.s: 
-            case CommandTypes.subtract:
+            case this.commandTypes.s: 
+            case this.commandTypes.subtract:
                 return this.handleSubtract();
 
-            case CommandTypes.m: 
-            case CommandTypes.multiply:
+            case this.commandTypes.m: 
+            case this.commandTypes.multiply:
                 return this.handleMultiply();
+
+            case this.commandTypes.d: 
+            case this.commandTypes.divide:
+                return this.handleDivide();
 
             default:
                 return false;

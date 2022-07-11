@@ -1,4 +1,4 @@
-export class FormatterService{
+export class FormatterService {
     constructor(){}
 
     public formatHeader(title: string){
@@ -12,6 +12,14 @@ export class FormatterService{
                 })
             )
         );
+    }
+
+    public printErrorMsg(msg: string){
+        const chalk = require('chalk');
+
+        console.log(chalk.red(
+            msg
+        ));
     }
 
     public printNewLine(){

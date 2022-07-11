@@ -5,8 +5,8 @@ export class NumberStackService {
 
     constructor(){}
 
-    public addNumberToStack(command: number): void {
-        NumberStackService.numberStack.push(command);
+    public addNumberToStack(value: number): void {
+        NumberStackService.numberStack.push(value);
     }
 
     public pullNumberFromStack(): number {
@@ -40,5 +40,10 @@ export class NumberStackService {
         operands.numberB = this.pullNumberFromStack();
 
         return operands;
+    }
+
+    public reverseOperands(operands: Operands): void {
+        this.addNumberToStack(operands.numberB);
+        this.addNumberToStack(operands.numberA);
     }
 }
