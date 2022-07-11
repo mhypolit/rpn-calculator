@@ -19,8 +19,12 @@ export class NumberStackService {
     }
 
     public showNumberStack(): void {
-        NumberStackService.numberStack.forEach((value)=>{
-            console.log(`${value}`);
+        NumberStackService.numberStack.forEach((value, i)=>{
+            if (i == NumberStackService.numberStack.length - 1) {
+                console.log(`> ${value}`);
+            } else {
+                console.log(`${value}`);
+            }
         });
     }
 }
