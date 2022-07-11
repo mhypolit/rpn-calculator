@@ -1,4 +1,4 @@
 export interface Operands {
-    numberA: number;
-    numberB: number;
+    numberA: number | undefined;
+    numberB: number | undefined;
 }

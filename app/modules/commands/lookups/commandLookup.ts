@@ -14,5 +14,4 @@ export const CommandLookup = {
     commandPrompt: `Please enter a number or command, press "enter" to submit: (Need Help? Type ${CommandTypes.h} or ${CommandTypes.help})\n`,
     usage: `Usage: RPN Calculator allows for easy calculation of complex math problem by utilizing stacks of number 
         and the 4 common operators (addition, subtraction, multiplication, division)\n`,
-    divideByZeroError: 'Unable to divide number by 0, Please select another operator or remove the 0.'
 }
