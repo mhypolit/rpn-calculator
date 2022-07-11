@@ -4,4 +4,8 @@ export enum CommandTypes {
     quit = 'rpn quit',
     h = 'rpn h',
     help = 'rpn help',
+    c = 'rpn c',
+    clear = 'rpn clear',
+    cl = 'rpn cl',
+    clearAll = 'rpn clearall'
 }
