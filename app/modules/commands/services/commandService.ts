@@ -44,8 +44,11 @@ export class CommandService extends RpnCalcBase {
         const operands = this.numberStackService.getOperands();
 
         if (operands != null){
+            console.log(`${CommandLookup.adding} ${operands.numberB} + ${operands.numberA}`);
             const sum = Number(operands.numberB) + Number(operands.numberA);
+            console.log(`${CommandLookup.addResult} ${sum}`);
             this.numberStackService.addNumberToStack(sum);
+            
         }
 
         return false;
@@ -55,7 +58,9 @@ export class CommandService extends RpnCalcBase {
         const operands = this.numberStackService.getOperands();
 
         if (operands != null) {
+            console.log(`${CommandLookup.subtracting} ${operands.numberB} - ${operands.numberA}`);
             const difference = Number(operands.numberB) - Number(operands.numberA);
+            console.log(`${CommandLookup.subtractResult} ${difference}`);
             this.numberStackService.addNumberToStack(difference);
         }
 
@@ -66,7 +71,9 @@ export class CommandService extends RpnCalcBase {
         const operands = this.numberStackService.getOperands();
 
         if (operands != null) { 
+            console.log(`${CommandLookup.multiplying} ${operands.numberB} * ${operands.numberA}`);
             const product = Number(operands.numberB) * Number(operands.numberA);
+            console.log(`${CommandLookup.multiplyResult} ${product}`);
             this.numberStackService.addNumberToStack(product);
         }
 
@@ -75,11 +82,13 @@ export class CommandService extends RpnCalcBase {
 
     private handleDivide(): boolean {
         const operands = this.numberStackService.getOperands();
-        let product = 0;
+        let quotient = 0;
         if (operands && operands.numberA != 0){
             if (operands != null) { 
-                product = Number(operands.numberB) / Number(operands.numberA);
-                this.numberStackService.addNumberToStack(product);
+                console.log(`${CommandLookup.dividing} ${operands.numberB} / ${operands.numberA}`);
+                quotient = Number(operands.numberB) / Number(operands.numberA);
+                console.log(`${CommandLookup.divideResult} ${quotient}`);
+                this.numberStackService.addNumberToStack(quotient);
             }
         } else {
             if(operands != null){
@@ -108,6 +117,10 @@ export class CommandService extends RpnCalcBase {
         rl.close(); 
 
         return command;
+    }
+
+    public async splitCommandBySpaces(command: string): Promise<string[]> {
+        return command.split(' ');
     }
 
     public runCommand(commands: CommandTypes): any {

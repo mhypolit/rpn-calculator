@@ -14,4 +14,12 @@ export const CommandLookup = {
     commandPrompt: `Please enter a number or command, press "enter" to submit: (Need Help? Type ${CommandTypes.h} or ${CommandTypes.help})\n`,
     usage: `Usage: RPN Calculator allows for easy calculation of complex math problem by utilizing stacks of number 
         and the 4 common operators (addition, subtraction, multiplication, division)\n`,
+    adding: 'Adding numbers:',
+    subtracting: 'Subtracting numbers:',
+    multiplying: 'Multiplying numbers:',
+    dividing: 'Dividing numbers:',
+    addResult: 'Sum is:',
+    subtractResult: 'Difference is:',
+    multiplyResult: 'Product is:',
+    divideResult: 'Quotient is: ',
 }
