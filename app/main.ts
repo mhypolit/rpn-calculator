@@ -2,12 +2,13 @@
 
 import './polyfills.ts'
 import { RpnCalcBase } from './core/rpnCalcBase';
-import { Title } from './views/title/title';
+import { FormatterService } from './modules/formatter/services/formatterService';
 import { CommandService } from './modules/commands/services/commandService';
 import { CommandTypes } from './modules/commands/enums/commandTypes';
+import { HeaderLookup } from './modules/shared/lookups/headerLookup';
 
 export class Main extends RpnCalcBase {
-    private readonly title: Title = new Title();
+    private readonly formatterService: FormatterService = new FormatterService();
     private readonly commandService: CommandService = new CommandService();
 
     constructor(){
@@ -15,10 +16,18 @@ export class Main extends RpnCalcBase {
         this.run();
     }
 
-    run(arg?: string): void {
+    async run(arg?: string) {
         this.clear();
-        this.title.showTitle('RPN Calculator');
-        this.commandService.runCommand(CommandTypes[CommandTypes.help]);
+        this.formatterService.formatHeader(HeaderLookup.mainHeader);
+        this.commandService.runCommand(CommandTypes.help);
+
+        let runProgram: boolean = true;
+
+        while (runProgram == true) 
+        {
+            const command = await this.commandService.handleCommandEnter();
+            runProgram = this.commandService.runCommand(command);
+        }
     }
 }
 

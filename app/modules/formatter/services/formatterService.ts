@@ -1,7 +1,7 @@
-export class Title{
+export class FormatterService{
     constructor(){}
 
-    public showTitle(title: string){
+    public formatHeader(title: string){
         const figlet = require('figlet');
         const chalk = require('chalk');
 
