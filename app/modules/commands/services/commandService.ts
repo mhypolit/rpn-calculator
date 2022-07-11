@@ -35,25 +35,26 @@ export class CommandService extends RpnCalcBase{
         return false;
     }
 
-    private handleClearConsole(): boolean {
-        this.clear();
-        return false;
-    }
-
     private handleAdd(): boolean {
-        const numberA = this.numberStackService.pullNumberFromStack();
-        const numberB = this.numberStackService.pullNumberFromStack();
-        const sum = Number(numberA) + Number(numberB);
+        const operands = this.numberStackService.getOperands();
+        const sum = Number(operands.numberA) + Number(operands.numberB);
         this.numberStackService.addNumberToStack(sum);
 
         return false;
     }
 
     private handleSubtract(): boolean {
-        const numberA = this.numberStackService.pullNumberFromStack();
-        const numberB = this.numberStackService.pullNumberFromStack();
-        const sum = Number(numberA) - Number(numberB);
-        this.numberStackService.addNumberToStack(sum);
+        const operands = this.numberStackService.getOperands();
+        const difference = Number(operands.numberA) - Number(operands.numberB);
+        this.numberStackService.addNumberToStack(difference);
+
+        return false;
+    }
+
+    private handleMultiply(): boolean {
+        const operands = this.numberStackService.getOperands();
+        const product = Number(operands.numberA) * Number(operands.numberB);
+        this.numberStackService.addNumberToStack(product);
 
         return false;
     }
@@ -94,10 +95,6 @@ export class CommandService extends RpnCalcBase{
             case CommandTypes.cl: 
             case CommandTypes.clearAll:
                 return this.handleClear(true);
-
-            case CommandTypes.cc: 
-            case CommandTypes.clearConsole:
-                return this.handleClearConsole();
                 
             case CommandTypes.a: 
             case CommandTypes.add:
@@ -106,6 +103,10 @@ export class CommandService extends RpnCalcBase{
             case CommandTypes.s: 
             case CommandTypes.subtract:
                 return this.handleSubtract();
+
+            case CommandTypes.m: 
+            case CommandTypes.multiply:
+                return this.handleMultiply();
 
             default:
                 return false;
