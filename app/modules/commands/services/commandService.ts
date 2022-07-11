@@ -44,7 +44,7 @@ export class CommandService extends RpnCalcBase {
         const operands = this.numberStackService.getOperands();
 
         if (operands != null){
-            const sum = Number(operands.numberA) + Number(operands.numberB);
+            const sum = Number(operands.numberB) + Number(operands.numberA);
             this.numberStackService.addNumberToStack(sum);
         }
 
@@ -55,7 +55,7 @@ export class CommandService extends RpnCalcBase {
         const operands = this.numberStackService.getOperands();
 
         if (operands != null) {
-            const difference = Number(operands.numberA) - Number(operands.numberB);
+            const difference = Number(operands.numberB) - Number(operands.numberA);
             this.numberStackService.addNumberToStack(difference);
         }
 
@@ -66,7 +66,7 @@ export class CommandService extends RpnCalcBase {
         const operands = this.numberStackService.getOperands();
 
         if (operands != null) { 
-            const product = Number(operands.numberA) * Number(operands.numberB);
+            const product = Number(operands.numberB) * Number(operands.numberA);
             this.numberStackService.addNumberToStack(product);
         }
 
@@ -76,9 +76,9 @@ export class CommandService extends RpnCalcBase {
     private handleDivide(): boolean {
         const operands = this.numberStackService.getOperands();
         let product = 0;
-        if (operands && operands.numberB != 0){
+        if (operands && operands.numberA != 0){
             if (operands != null) { 
-                product = Number(operands.numberA) / Number(operands.numberB);
+                product = Number(operands.numberB) / Number(operands.numberA);
                 this.numberStackService.addNumberToStack(product);
             }
         } else {
