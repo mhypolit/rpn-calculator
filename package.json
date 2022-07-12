@@ -4,7 +4,8 @@
   "description": "CLI RPN Calculator: A standard way to calculate a stack of number using 4 arithmetic operators and more.",
   "main": "index.js",
   "scripts": {
-    "test": "test",
+    "test": "jest",
+    "build": "tsc -p tsconfig.build.json",
     "calc": "ts-node app/main.ts"
   },
   "repository": {
@@ -29,12 +30,18 @@
     "core-js": "^2.5.1",
     "figlet": "^1.5.2",
     "inquirer": "^3.3.0",
-    "ora": "^1.3.0"
+    "jest-mock": "^28.1.1",
+    "ora": "^1.3.0",
+    "ts-jest-mock": "^1.1.33"
   },
   "devDependencies": {
+    "@types/babel__core": "^7.1.19",
     "@types/core-js": "^0.9.43",
+    "@types/jest": "^28.1.4",
     "@types/ora": "^1.3.1",
+    "jest": "^28.1.2",
+    "ts-jest": "^28.0.5",
     "ts-node": "^3.3.0",
-    "typescript": "^2.5.3"
+    "typescript": "4.3"
   }
 }

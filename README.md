@@ -13,13 +13,26 @@ on a pair of numbers at a time from the stack.
 **How to run the application:** 
 
 Step 1: Clone or Fork repository to your local computer.
-Step 2: Run `npm install`
-- This step requires an installation of NodeJs and NPM.
 
-Step 3: Navigate to the project git directory on your local computer in console, bash, or powershell.
+Step 2: Navigate to the project git directory on your local computer in console, bash, or powershell.
 - ex. C:\Users\markh\source\repos\rpn-calculator
 
+Step 3: Run `npm install`
+- This step requires an installation of NodeJs and NPM.
+
 Step 4: Type `npm run calc` in the command line. 
+
+**How to run unit test:**
+
+Step 1: Clone or Fork repository to your local computer.
+
+Step 2: Navigate to the project git directory on your local computer in console, bash, or powershell.
+- ex. C:\Users\markh\source\repos\rpn-calculator
+
+Step 3: Run `npm install`
+- Unit test require ts-jest, and newer version of typescript.
+
+Step 4: Type `npm test` or `npx jest` in the command line. 
 
 **Tech Dependencies:**
 
